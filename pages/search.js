@@ -26,7 +26,7 @@ const search = () => {
         <SavedPlaces>
             <StarIcon className="bg-gray-200 text-white rounded-full mr-3 ml-2 h-10 w-10 p-1"/>Saved Places
         </SavedPlaces>
-        <ButtonConfirm>Confirm Location</ButtonConfirm>
+        <Link href="/confirm"><ButtonConfirm>Confirm Location</ButtonConfirm></Link>
     </Wrapper>
     </div>
   )
