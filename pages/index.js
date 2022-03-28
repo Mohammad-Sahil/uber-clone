@@ -6,7 +6,8 @@ import Map from '../components/map';
 
 export default function Home() {
   return (
-    <Wrapper>
+    <div className="containerWidth">
+      <Wrapper>
       <Head>
         <title>Uber Clone</title>
         <meta name="description" content="Uber Clone" />
@@ -14,8 +15,25 @@ export default function Home() {
       </Head>
 
       <Map/>
-      <ActionItems>Start</ActionItems>
+      <ActionItems className=''>
+        {/* Header  */}
+        <Header>
+          <UberLogo src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"/>
+          <Profile>
+            <Name>Mohammad Sahil</Name>
+            <UserImage src="https://cdn-icons-png.flaticon.com/512/149/149071.png"/>
+          </Profile>
+        </Header>
+        {/* ActionButtons  */}
+        <ActionButtons>
+          <ActionButton><ActionButtonImage src="https://freepngimg.com/thumb/car/31510-9-car-transparent-background.png"/>Ride</ActionButton>
+          <ActionButton><ActionButtonImage src="https://www.pngkit.com/png/full/376-3762160_vespa-primavera-piaggio-vespa-gts-125.png"/>Wheel</ActionButton>
+          <ActionButton><ActionButtonImage src="https://www.freeiconspng.com/thumbs/calendar-image-png/calendar-image-png-3.png"/>Reserve</ActionButton>
+        </ActionButtons>
+        {/* InputButtons  */}
+      </ActionItems>
     </Wrapper>
+    </div> 
   )
 }
 
@@ -25,6 +43,30 @@ const Wrapper = tw.div`
   h-screen
 `
 const ActionItems = tw.div`
-  bg-red-500
-  flex-1
+  flex-1 p-4
+`
+const Header = tw.div`
+  flex
+`
+const UberLogo = tw.img`
+  h-8
+`
+const Profile = tw.div`
+  flex items-center ml-auto mr-0
+`
+const Name = tw.div`
+  mr-4 w-18 text-right text-sm 
+`
+const UserImage = tw.img`
+  rounded-full
+  h-10
+`
+const ActionButtons = tw.div`
+  flex my-3
+`
+const ActionButton = tw.div`
+  bg-gray-200 flex-1 m-1 p-3 flex flex-col justify-center items-center rounded-lg transform hover:scale-105 cursor-pointer transition
+`
+const ActionButtonImage = tw.img`
+  h-12
 `
