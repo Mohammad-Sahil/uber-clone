@@ -6,7 +6,7 @@ import tw from "tailwind-styled-components";
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2FoaWxtZWpha2hhcyIsImEiOiJjbDE4N21kMW4wYjlpM2ltbThsbHdpZWtnIn0.bdSWoFVV203mLD2u8aVmlQ';
 
-const map = () => {
+const Map = () => {
     useEffect(() => {
         const map = new mapboxgl.Map({
           container: 'map',
@@ -21,7 +21,7 @@ const map = () => {
   )
 }
 
-export default map
+export default Map;
 
 const Wrapper = tw.div`
   bg-red-200

@@ -1,4 +1,4 @@
-import { Link } from '@mui/icons-material';
+import Link from 'next/link';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import tw from "tailwind-styled-components";
 
