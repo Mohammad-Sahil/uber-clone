@@ -3,8 +3,11 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import tw from "tailwind-styled-components";
 import AddIcon from '@mui/icons-material/Add';
 import StarIcon from '@mui/icons-material/Star';
+import { useState } from 'react';
 
 const search = () => {
+    const [pickup, setPickup] = useState('');
+    const [dropOff, setDropOff] = useState('');
   return (
     <div className="containerWidth">
         <Wrapper>
@@ -18,15 +21,22 @@ const search = () => {
             <Square src="https://storage.needpix.com/rsynced_images/black-square-with-fleck-pattern.jpg" />
             </FromToIcons>
             <InputBoxes>
-                <Input placeholder="Enter pickup location..."/>
-                <Input placeholder="Where to?..." style={{marginTop: "40px"}}/>
+                <Input onChange={e => setPickup(e.target.value)} value={pickup} placeholder="Enter pickup location..."/>
+                <Input onChange={e => setDropOff(e.target.value)} value={dropOff} placeholder="Where to?..." style={{marginTop: "40px"}}/>
             </InputBoxes>
             <AddIcon className="bg-gray-200 rounded-full mr-3 ml-2 h-10 w-10 p-1"/>
         </InputContainer>
         <SavedPlaces>
             <StarIcon className="bg-gray-200 text-white rounded-full mr-3 ml-2 h-10 w-10 p-1"/>Saved Places
         </SavedPlaces>
-        <Link href="/confirm"><ButtonConfirm>Confirm Location</ButtonConfirm></Link>
+        <Link href={{
+            pathname: "/confirm",
+            query: {
+                pickup: pickup,
+                dropoff: dropOff
+            }
+        }}>
+        <ButtonConfirm>Confirm Location</ButtonConfirm></Link>
     </Wrapper>
     </div>
   )
