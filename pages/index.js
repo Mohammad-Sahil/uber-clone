@@ -4,8 +4,29 @@ import styles from '../styles/Home.module.css';
 import tw from "tailwind-styled-components";
 import Map from '../components/map';
 import Link from 'next/link';
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../firebase';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+
 
 export default function Home() {
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+  useEffect(() => {
+    return onAuthStateChanged(auth, user => {
+      if(user){
+        console.log(user);
+        setUser({
+          name: user.displayName,
+          photoUrl: user.photoURL
+        })
+      } else{
+        setUser(null);
+        router.push('/login')
+      }
+    })
+  },[])
   return (
     <div className="containerWidth">
       <Wrapper>
@@ -21,8 +42,8 @@ export default function Home() {
         <Header>
           <UberLogo src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"/>
           <Profile>
-            <Name>Mohammad Sahil</Name>
-            <UserImage src="https://cdn-icons-png.flaticon.com/512/149/149071.png"/>
+            <Name>{user && user.name}</Name>
+            <UserImage src={user && user.photoUrl} onClick={() => signOut(auth)}/>
           </Profile>
         </Header>
         {/* ActionButtons  */}
@@ -60,7 +81,7 @@ const Name = tw.div`
   mr-4 w-18 text-right text-sm 
 `
 const UserImage = tw.img`
-  rounded-full
+  rounded-full cursor-pointer
   h-10
 `
 const ActionButtons = tw.div`
@@ -70,7 +91,7 @@ const ActionButton = tw.div`
   bg-gray-200 flex-1 m-1 p-3 flex flex-col justify-center items-center rounded-lg transform hover:scale-105 cursor-pointer transition text-lg
 `
 const ActionButtonImage = tw.img`
-  h-12
+  h-12 
 `
 const InputButtons = tw.div`
   h-20 bg-gray-200 m-1 p-4 flex items-center rounded text-xl mt-5

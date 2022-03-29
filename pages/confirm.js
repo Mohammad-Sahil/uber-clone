@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import tw from "tailwind-styled-components";
 import Map from '../components/map';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import RideSelector from '../components/RideSelector';
 
 const Confirm = () => {
@@ -10,8 +11,8 @@ const Confirm = () => {
     const {pickup, dropoff} = router.query;
     console.log(`${pickup} and ${dropoff}`)
 
-    const [pickupCordinates, setPickupCordinates] = useState();
-    const [dropOffCordinates, setDropOffCordinates] = useState();
+    const [pickupCordinates, setPickupCordinates] = useState([0,0]);
+    const [dropOffCordinates, setDropOffCordinates] = useState([0,0]);
 
     useEffect(() => {
         getPickupCordinates(pickup);
@@ -38,19 +39,25 @@ const Confirm = () => {
             })
         )
         .then(res => res.json())
-        .then((data) => setDropOffCordinates(data.features[0].center));
+        .then((data) => setDropOffCordinates(data.features[0]?.center));
         // .catch((err) => console.log(err));
     }
   return (
     <div className="containerWidth">
     <Wrapper>
+         <ButtonContainer>
+            <Link href="/search"><div style={{cursor: "pointer"}}><KeyboardBackspaceIcon style={{fontSize: "35px", color: "rgba(0,0,0,0.8)"}}/></div></Link>
+        </ButtonContainer>
         <Map
             pickupCordinates={pickupCordinates}
             dropOffCordinates={dropOffCordinates}
         />
         <ConfirmationBox>
         <RideSelectorBox>
-            <RideSelector/>
+            <RideSelector
+                pickupCordinates={pickupCordinates}
+                dropOffCordinates={dropOffCordinates}
+            />
         </RideSelectorBox>
         <ConfirmButton>
             Confirm UberX
@@ -65,8 +72,11 @@ const Confirm = () => {
 
 export default Confirm;
 
+const ButtonContainer = tw.div`
+    rounded-full absolute top-4 left-4 z-10 bg-white cursor-pointer p-1 shadow-md
+`
 const Wrapper = tw.div`
-    bg-gray-200 h-screen flex flex-col
+    bg-gray-200 h-screen flex flex-col relative
 `
 const ConfirmationBox = tw.div`
     flex-1 bg-white flex flex-col h-1/2
