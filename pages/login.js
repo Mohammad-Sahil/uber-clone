@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { auth, provider } from '../firebase';
 
-const login = () => {
+const Login = () => {
     const router = useRouter();
     useEffect(() => {
         onAuthStateChanged(auth, user => {
@@ -25,7 +25,7 @@ const login = () => {
   )
 }
 
-export default login;
+export default Login;
 
 const Title = tw.div`
     px-2 text-3xl pt-4 text-gray-500 
