@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import StarIcon from '@mui/icons-material/Star';
 import { useState } from 'react';
 
-const search = () => {
+const Search = () => {
     const [pickup, setPickup] = useState('');
     const [dropOff, setDropOff] = useState('');
   return (
@@ -42,7 +42,7 @@ const search = () => {
   )
 }
 
-export default search;
+export default Search;
 
 const Wrapper = tw.div`
     bg-gray-200 h-screen flex flex-col
